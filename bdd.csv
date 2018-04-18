@@ -1,5 +1,7 @@
-"id", "titre", "déscription", "année de sortie", "genre", "realisateur" %
-"1", "Tueurs née", "Un couple de tueurs, Mickey et Mallory, se servent des médias jusqu'à devenir des stars de l'actualité.", "1994", "11", "Olivier Stone" %
-"2", "Reservoir Dogs", "Apres un hold-up manque, des cambrioleurs de haut vol font leurs comptes dans une confrontation violente, pour découvrir lequel d'entre eux les a trahis.", "1992", "3 ", "Quentin Tarantino" %
-"10", "True Romance", "Le jour de son anniversaire, Clarence Worley rencontre la splendide Alabama dans un cinéma miteux. Coup de foudre immédiat. Après une nuit d'amour, Alabama avoue a Clarence qu'elle a été en fait engagée par le patron de Clarence comme cadeau d'anniversaire. De là va commencer une folle aventure.", "1993", "9", "Tony Scoot" %
-
+"id", "titre", "description", "annee de sortie", "genre", "realisateur"
+"", "Tueurs nee", "Un couple de tueurs, Mickey et Mallory, se servent des médias jusqu'à devenir des stars de l'actualité.", "1994", "", "Olivier Stone"
+"", "Reservoir Dogs", "Apres un hold-up manque, des cambrioleurs de haut vol font leurs comptes dans une confrontation violente, pour decouvrir lequel d'entre eux les a trahis.", "1992", "", "Quentin Tarantino"
+"", "True Romance", "Le jour de son anniversaire, Clarence Worley rencontre la splendide Alabama dans un cinéma miteux. Coup de foudre immédiat. Après une nuit d'amour, Alabama avoue a Clarence qu'elle a été en fait engagée par le patron de Clarence comme cadeau d'anniversaire. De là va commencer une folle aventure.", "1993", "", "Tony Scoot"
+"", "The Royal Tenenbaum",  "Pour rassembler sa famille, Royal Tenenbaum fait croire à son ex-femme et à ses enfants qu'il est atteint d'un mal incurable et qu'il ne lui reste que quelques semaines à vivre.", "2001/2002", "", "Wess Anderson"
+"", "Fight club", "Le film démarre sur le plan du personnage principal (Edward Norton) à qui on a enfoncé un pistolet dans la bouche et dont on entend la voix en monologue qui se remémore comment il en est arrivé là.", "1999", "", "David Fincher"
+"", "Drive", "Un jeune homme solitaire, conduit le jour à Hollywood pour le cinéma en tant que cascadeur et la nuit pour des truands.", "2011", "", "Nicolas Winding Refn"
