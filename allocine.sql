@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  sam. 21 avr. 2018 à 19:35
+-- Généré le :  lun. 23 avr. 2018 à 07:52
 -- Version du serveur :  5.6.38
 -- Version de PHP :  7.2.1
 
@@ -68,20 +68,20 @@ INSERT INTO `acteur` (`ID`, `nom_acteur`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `acteur_film`
+-- Structure de la table `acteur/film`
 --
 
-CREATE TABLE `acteur_film` (
+CREATE TABLE `acteur/film` (
   `id` int(10) NOT NULL,
   `acteur_id` int(10) NOT NULL,
   `film_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `acteur_film`
+-- Déchargement des données de la table `acteur/film`
 --
 
-INSERT INTO `acteur_film` (`id`, `acteur_id`, `film_id`) VALUES
+INSERT INTO `acteur/film` (`id`, `acteur_id`, `film_id`) VALUES
 (1, 1, 1),
 (2, 2, 1),
 (3, 3, 2),
@@ -176,20 +176,20 @@ INSERT INTO `genre` (`id_genre`, `Genre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `genre_id`
+-- Structure de la table `genre/id`
 --
 
-CREATE TABLE `genre_id` (
+CREATE TABLE `genre/id` (
   `ID` int(10) NOT NULL,
   `film/ID` int(10) NOT NULL,
   `genre/ID` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `genre_id`
+-- Déchargement des données de la table `genre/id`
 --
 
-INSERT INTO `genre_id` (`ID`, `film/ID`, `genre/ID`) VALUES
+INSERT INTO `genre/id` (`ID`, `film/ID`, `genre/ID`) VALUES
 (1, 1, 1),
 (2, 1, 2),
 (3, 1, 3),
@@ -239,20 +239,20 @@ INSERT INTO `realisateur` (`id`, `nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `realisateur_film`
+-- Structure de la table `realisateur/film`
 --
 
-CREATE TABLE `realisateur_film` (
+CREATE TABLE `realisateur/film` (
   `id` int(11) NOT NULL,
   `realisateur_id` int(10) NOT NULL,
   `film_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `realisateur_film`
+-- Déchargement des données de la table `realisateur/film`
 --
 
-INSERT INTO `realisateur_film` (`id`, `realisateur_id`, `film_id`) VALUES
+INSERT INTO `realisateur/film` (`id`, `realisateur_id`, `film_id`) VALUES
 (16, 1, 1),
 (17, 2, 2),
 (18, 3, 5),
@@ -293,9 +293,9 @@ ALTER TABLE `acteur`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Index pour la table `acteur_film`
+-- Index pour la table `acteur/film`
 --
-ALTER TABLE `acteur_film`
+ALTER TABLE `acteur/film`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -311,9 +311,9 @@ ALTER TABLE `genre`
   ADD PRIMARY KEY (`id_genre`);
 
 --
--- Index pour la table `genre_id`
+-- Index pour la table `genre/id`
 --
-ALTER TABLE `genre_id`
+ALTER TABLE `genre/id`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -323,9 +323,9 @@ ALTER TABLE `realisateur`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `realisateur_film`
+-- Index pour la table `realisateur/film`
 --
-ALTER TABLE `realisateur_film`
+ALTER TABLE `realisateur/film`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -339,9 +339,9 @@ ALTER TABLE `acteur`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT pour la table `acteur_film`
+-- AUTO_INCREMENT pour la table `acteur/film`
 --
-ALTER TABLE `acteur_film`
+ALTER TABLE `acteur/film`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
@@ -357,9 +357,9 @@ ALTER TABLE `genre`
   MODIFY `id_genre` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT pour la table `genre_id`
+-- AUTO_INCREMENT pour la table `genre/id`
 --
-ALTER TABLE `genre_id`
+ALTER TABLE `genre/id`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
@@ -369,9 +369,9 @@ ALTER TABLE `realisateur`
   MODIFY `id` int(150) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT pour la table `realisateur_film`
+-- AUTO_INCREMENT pour la table `realisateur/film`
 --
-ALTER TABLE `realisateur_film`
+ALTER TABLE `realisateur/film`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
