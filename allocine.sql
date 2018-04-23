@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  lun. 23 avr. 2018 à 07:58
+-- Généré le :  lun. 23 avr. 2018 à 12:20
 -- Version du serveur :  5.6.38
 -- Version de PHP :  7.2.1
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `allocine`
 --
+CREATE DATABASE IF NOT EXISTS `allocine` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `allocine`;
 
 -- --------------------------------------------------------
 
@@ -181,15 +183,15 @@ INSERT INTO `genre` (`id_genre`, `Genre`) VALUES
 
 CREATE TABLE `genre_id` (
   `ID` int(10) NOT NULL,
-  `film/ID` int(10) NOT NULL,
-  `genre/ID` int(10) NOT NULL
+  `film_id` int(10) NOT NULL,
+  `genre_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `genre_id`
 --
 
-INSERT INTO `genre_id` (`ID`, `film/ID`, `genre/ID`) VALUES
+INSERT INTO `genre_id` (`ID`, `film_id`, `genre_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
 (3, 1, 3),
@@ -373,6 +375,106 @@ ALTER TABLE `realisateur`
 --
 ALTER TABLE `realisateur_film`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+--
+-- Base de données :  `ooooror`
+--
+CREATE DATABASE IF NOT EXISTS `ooooror` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `ooooror`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `acteur/film`
+--
+
+CREATE TABLE `acteur/film` (
+  `id` int(10) NOT NULL,
+  `acteur_id` int(10) NOT NULL,
+  `film_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `acteur/film`
+--
+
+INSERT INTO `acteur/film` (`id`, `acteur_id`, `film_id`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 2),
+(4, 4, 2),
+(5, 5, 5),
+(6, 6, 6),
+(7, 7, 6),
+(8, 8, 6),
+(9, 9, 7),
+(10, 10, 7),
+(11, 11, 8),
+(12, 12, 8),
+(13, 13, 9),
+(14, 14, 9),
+(15, 15, 10),
+(16, 16, 10),
+(17, 17, 11),
+(18, 18, 11),
+(19, 19, 12),
+(20, 20, 12),
+(21, 21, 13),
+(22, 22, 13),
+(23, 23, 14),
+(24, 24, 14),
+(25, 25, 15),
+(26, 26, 15),
+(27, 27, 16),
+(28, 28, 16);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `acteur/id`
+--
+
+CREATE TABLE `acteur/id` (
+  `id` int(11) NOT NULL,
+  `filmid` int(11) NOT NULL,
+  `acteurid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `acteur/film`
+--
+ALTER TABLE `acteur/film`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `acteur/id`
+--
+ALTER TABLE `acteur/id`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `acteur/film`
+--
+ALTER TABLE `acteur/film`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT pour la table `acteur/id`
+--
+ALTER TABLE `acteur/id`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Base de données :  `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `test`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
