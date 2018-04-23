@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  lun. 23 avr. 2018 à 12:20
+-- Généré le :  lun. 23 avr. 2018 à 16:00
 -- Version du serveur :  5.6.38
 -- Version de PHP :  7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,92 +17,22 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `acs`
+-- Base de données :  `allocine`
 --
-CREATE DATABASE IF NOT EXISTS `allocine` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `allocine`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departement`
+-- Structure de la table `acteur`
 --
 
-DROP TABLE IF EXISTS `departement`;
-CREATE TABLE IF NOT EXISTS `departement` (
-  `ID` varchar(10) NOT NULL,
-  `Dep` varchar(255) NOT NULL,
-  `nom` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+CREATE TABLE `acteur` (
+  `id` int(10) NOT NULL,
+  `nom_acteur` varchar(255) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `departement`
---
-
-INSERT INTO `departement` (`ID`, `Dep`, `nom`) VALUES
-('1', '03', '	Allier'),
-('2', '25', 'Doubs'),
-('3', '39', 'Jura');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `membre`
---
-
-DROP TABLE IF EXISTS `membre`;
-CREATE TABLE IF NOT EXISTS `membre` (
-  `ID` varchar(10) NOT NULL,
-  `Nom` varchar(256) NOT NULL,
-  `Prenoms` varchar(256) NOT NULL,
-  `idDep` int(10) DEFAULT NULL,
-  `gendre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `1` (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `membre`
---
-
-INSERT INTO `membre` (`ID`, `Nom`, `Prenoms`, `idDep`, `gendre`) VALUES
-('1', 'Vignaud', 'Julien', 1, 'male'),
-('2', 'Attia', 'Chayma', 2, 'female'),
-('3', 'Zanon', 'Sebastien', 2, 'male'),
-('4', 'Pasajlic', 'Nenad', 2, 'male'),
-('5', 'Ben Ali', 'Adnane', 2, 'male'),
-('6', 'Lacroix', 'Charlotte', 2, 'female'),
-('7', 'Bourgeois', 'Claire', 3, 'female'),
-('8', 'Rouillier', 'Florian', 2, 'male'),
-('9', 'Vital', 'Jeremy', 2, 'male'),
-('10', 'Jacquoit', 'Nicolas', 2, 'male'),
-('11', 'Martin', 'Tom', 2, 'male'),
-('12', 'Khemaja', 'Yannick', 2, 'male'),
-('13', 'Fornari', 'Yoan', 2, 'male'),
-('14', 'Ben Younes', 'Sirine', 2, 'female'),
-('15', 'Benseghir', 'Mehdi', 2, 'male');
---
--- Database: `allocine`
---
-CREATE DATABASE IF NOT EXISTS `allocine` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `allocine`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `acteur`
---
-
-DROP TABLE IF EXISTS `acteur`;
-CREATE TABLE IF NOT EXISTS `acteur` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `nom_acteur` varchar(255) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `acteur`
+-- Déchargement des données de la table `acteur`
 --
 
 INSERT INTO `acteur` (`id`, `nom_acteur`) VALUES
@@ -140,19 +68,17 @@ INSERT INTO `acteur` (`id`, `nom_acteur`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `acteur_film`
+-- Structure de la table `acteur_film`
 --
 
-DROP TABLE IF EXISTS `acteur_film`;
-CREATE TABLE IF NOT EXISTS `acteur_film` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `acteur_film` (
+  `id` int(10) NOT NULL,
   `acteur_id` int(10) NOT NULL,
-  `film_id` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+  `film_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `acteur_film`
+-- Déchargement des données de la table `acteur_film`
 --
 
 INSERT INTO `acteur_film` (`id`, `acteur_id`, `film_id`) VALUES
@@ -188,22 +114,20 @@ INSERT INTO `acteur_film` (`id`, `acteur_id`, `film_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `film`
+-- Structure de la table `film`
 --
 
-DROP TABLE IF EXISTS `film`;
-CREATE TABLE IF NOT EXISTS `film` (
-  `id_film` int(255) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `film` (
+  `id_film` int(255) NOT NULL,
   `titre` varchar(256) NOT NULL,
   `description` text NOT NULL,
   `annee_sortie` year(4) NOT NULL,
   `realisateur` varchar(256) NOT NULL,
-  `film_id` int(10) NOT NULL,
-  PRIMARY KEY (`id_film`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+  `film_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `film`
+-- Déchargement des données de la table `film`
 --
 
 INSERT INTO `film` (`id_film`, `titre`, `description`, `annee_sortie`, `realisateur`, `film_id`) VALUES
@@ -225,18 +149,16 @@ INSERT INTO `film` (`id_film`, `titre`, `description`, `annee_sortie`, `realisat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `genre`
+-- Structure de la table `genre`
 --
 
-DROP TABLE IF EXISTS `genre`;
-CREATE TABLE IF NOT EXISTS `genre` (
-  `id_genre` int(10) NOT NULL AUTO_INCREMENT,
-  `Genre` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_genre`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+CREATE TABLE `genre` (
+  `id_genre` int(10) NOT NULL,
+  `Genre` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `genre`
+-- Déchargement des données de la table `genre`
 --
 
 INSERT INTO `genre` (`id_genre`, `Genre`) VALUES
@@ -255,7 +177,7 @@ INSERT INTO `genre` (`id_genre`, `Genre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `genre_id`
+-- Structure de la table `genre_id`
 --
 
 CREATE TABLE `genre_id` (
@@ -265,7 +187,7 @@ CREATE TABLE `genre_id` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `genre_id`
+-- Déchargement des données de la table `genre_id`
 --
 
 INSERT INTO `genre_id` (`ID`, `film_id`, `genre_id`) VALUES
@@ -287,18 +209,16 @@ INSERT INTO `genre_id` (`ID`, `film_id`, `genre_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `image`
+-- Structure de la table `image`
 --
 
-DROP TABLE IF EXISTS `image`;
-CREATE TABLE IF NOT EXISTS `image` (
-  `id_image` int(11) NOT NULL AUTO_INCREMENT,
-  `image` varchar(255) NOT NULL,
-  PRIMARY KEY (`id_image`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+CREATE TABLE `image` (
+  `id_image` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `image`
+-- Déchargement des données de la table `image`
 --
 
 INSERT INTO `image` (`id_image`, `image`) VALUES
@@ -320,19 +240,17 @@ INSERT INTO `image` (`id_image`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `image_film`
+-- Structure de la table `image_film`
 --
 
-DROP TABLE IF EXISTS `image_film`;
-CREATE TABLE IF NOT EXISTS `image_film` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `image_film` (
+  `id` int(11) NOT NULL,
   `id_film` int(11) NOT NULL,
-  `id_image` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+  `id_image` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `image_film`
+-- Déchargement des données de la table `image_film`
 --
 
 INSERT INTO `image_film` (`id`, `id_film`, `id_image`) VALUES
@@ -354,18 +272,16 @@ INSERT INTO `image_film` (`id`, `id_film`, `id_image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `realisateur`
+-- Structure de la table `realisateur`
 --
 
-DROP TABLE IF EXISTS `realisateur`;
-CREATE TABLE IF NOT EXISTS `realisateur` (
-  `id` int(150) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+CREATE TABLE `realisateur` (
+  `id` int(150) NOT NULL,
+  `nom` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `realisateur`
+-- Déchargement des données de la table `realisateur`
 --
 
 INSERT INTO `realisateur` (`id`, `nom`) VALUES
@@ -388,19 +304,17 @@ INSERT INTO `realisateur` (`id`, `nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `realisateur_film`
+-- Structure de la table `realisateur_film`
 --
 
-DROP TABLE IF EXISTS `realisateur_film`;
-CREATE TABLE IF NOT EXISTS `realisateur_film` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `realisateur_film` (
+  `id` int(11) NOT NULL,
   `realisateur_id` int(10) NOT NULL,
-  `film_id` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+  `film_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `realisateur_film`
+-- Déchargement des données de la table `realisateur_film`
 --
 
 INSERT INTO `realisateur_film` (`id`, `realisateur_id`, `film_id`) VALUES
@@ -419,120 +333,57 @@ INSERT INTO `realisateur_film` (`id`, `realisateur_id`, `film_id`) VALUES
 (28, 13, 15),
 (29, 14, 16),
 (42, 13, 15);
---
--- Database: `csv_db`
---
-CREATE DATABASE IF NOT EXISTS `csv_db` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `csv_db`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_name`
---
-
-DROP TABLE IF EXISTS `tbl_name`;
-CREATE TABLE IF NOT EXISTS `tbl_name` (
-  `id` int(4) DEFAULT NULL,
-  `first_name` varchar(11) DEFAULT NULL,
-  `last_name` varchar(10) DEFAULT NULL,
-  `email` varchar(35) DEFAULT NULL,
-  `gender` varchar(6) DEFAULT NULL,
-  `ip_address` varchar(15) DEFAULT NULL,
-  `birth_date` varchar(10) DEFAULT NULL,
-  `zip_code` varchar(14) DEFAULT NULL,
-  `avatar_url` varchar(84) DEFAULT NULL,
-  `state_code` varchar(4) DEFAULT NULL,
-  `country_code` varchar(2) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_name`
---
-
---
--- AUTO_INCREMENT pour la table `realisateur_film`
---
-ALTER TABLE `realisateur_film`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
---
--- Base de données :  `ooooror`
---
-CREATE DATABASE IF NOT EXISTS `ooooror` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `ooooror`;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `acteur/film`
---
-
-CREATE TABLE `acteur/film` (
-  `id` int(10) NOT NULL,
-  `acteur_id` int(10) NOT NULL,
-  `film_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `acteur/film`
---
-
-INSERT INTO `acteur/film` (`id`, `acteur_id`, `film_id`) VALUES
-(1, 1, 1),
-(2, 2, 1),
-(3, 3, 2),
-(4, 4, 2),
-(5, 5, 5),
-(6, 6, 6),
-(7, 7, 6),
-(8, 8, 6),
-(9, 9, 7),
-(10, 10, 7),
-(11, 11, 8),
-(12, 12, 8),
-(13, 13, 9),
-(14, 14, 9),
-(15, 15, 10),
-(16, 16, 10),
-(17, 17, 11),
-(18, 18, 11),
-(19, 19, 12),
-(20, 20, 12),
-(21, 21, 13),
-(22, 22, 13),
-(23, 23, 14),
-(24, 24, 14),
-(25, 25, 15),
-(26, 26, 15),
-(27, 27, 16),
-(28, 28, 16);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `acteur/id`
---
-
-CREATE TABLE `acteur/id` (
-  `id` int(11) NOT NULL,
-  `filmid` int(11) NOT NULL,
-  `acteurid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Index pour les tables déchargées
 --
 
 --
--- Index pour la table `acteur/film`
+-- Index pour la table `acteur`
 --
-ALTER TABLE `acteur/film`
+ALTER TABLE `acteur`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `acteur/id`
+-- Index pour la table `acteur_film`
 --
-ALTER TABLE `acteur/id`
+ALTER TABLE `acteur_film`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `film`
+--
+ALTER TABLE `film`
+  ADD PRIMARY KEY (`id_film`) USING BTREE;
+
+--
+-- Index pour la table `genre`
+--
+ALTER TABLE `genre`
+  ADD PRIMARY KEY (`id_genre`);
+
+--
+-- Index pour la table `image`
+--
+ALTER TABLE `image`
+  ADD PRIMARY KEY (`id_image`);
+
+--
+-- Index pour la table `image_film`
+--
+ALTER TABLE `image_film`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `realisateur`
+--
+ALTER TABLE `realisateur`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `realisateur_film`
+--
+ALTER TABLE `realisateur_film`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -540,21 +391,52 @@ ALTER TABLE `acteur/id`
 --
 
 --
--- AUTO_INCREMENT pour la table `acteur/film`
+-- AUTO_INCREMENT pour la table `acteur`
 --
-ALTER TABLE `acteur/film`
+ALTER TABLE `acteur`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT pour la table `acteur/id`
+-- AUTO_INCREMENT pour la table `acteur_film`
 --
-ALTER TABLE `acteur/id`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `acteur_film`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
 --
--- Base de données :  `test`
+-- AUTO_INCREMENT pour la table `film`
 --
-CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `test`;
+ALTER TABLE `film`
+  MODIFY `id_film` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT pour la table `genre`
+--
+ALTER TABLE `genre`
+  MODIFY `id_genre` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT pour la table `image`
+--
+ALTER TABLE `image`
+  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT pour la table `image_film`
+--
+ALTER TABLE `image_film`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT pour la table `realisateur`
+--
+ALTER TABLE `realisateur`
+  MODIFY `id` int(150) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT pour la table `realisateur_film`
+--
+ALTER TABLE `realisateur_film`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
