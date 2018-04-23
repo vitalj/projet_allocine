@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le :  jeu. 19 avr. 2018 à 10:35
--- Version du serveur :  10.1.31-MariaDB
--- Version de PHP :  7.2.3
+-- Hôte : localhost:8889
+-- Généré le :  lun. 23 avr. 2018 à 07:58
+-- Version du serveur :  5.6.38
+-- Version de PHP :  7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `projet_allocine`
+-- Base de données :  `allocine`
 --
 
 -- --------------------------------------------------------
@@ -70,26 +68,48 @@ INSERT INTO `acteur` (`ID`, `nom_acteur`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `acteur/film`
+-- Structure de la table `acteur_film`
 --
 
-CREATE TABLE `acteur/film` (
+CREATE TABLE `acteur_film` (
   `id` int(10) NOT NULL,
   `acteur_id` int(10) NOT NULL,
   `film_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `acteur/id`
+-- Déchargement des données de la table `acteur_film`
 --
 
-CREATE TABLE `acteur/id` (
-  `id` int(11) NOT NULL,
-  `filmid` int(11) NOT NULL,
-  `acteurid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `acteur_film` (`id`, `acteur_id`, `film_id`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 2),
+(4, 4, 2),
+(5, 5, 5),
+(6, 6, 6),
+(7, 7, 6),
+(8, 8, 6),
+(9, 9, 7),
+(10, 10, 7),
+(11, 11, 8),
+(12, 12, 8),
+(13, 13, 9),
+(14, 14, 9),
+(15, 15, 10),
+(16, 16, 10),
+(17, 17, 11),
+(18, 18, 11),
+(19, 19, 12),
+(20, 20, 12),
+(21, 21, 13),
+(22, 22, 13),
+(23, 23, 14),
+(24, 24, 14),
+(25, 25, 15),
+(26, 26, 15),
+(27, 27, 16),
+(28, 28, 16);
 
 -- --------------------------------------------------------
 
@@ -156,20 +176,20 @@ INSERT INTO `genre` (`id_genre`, `Genre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `genre/id`
+-- Structure de la table `genre_id`
 --
 
-CREATE TABLE `genre/id` (
+CREATE TABLE `genre_id` (
   `ID` int(10) NOT NULL,
   `film/ID` int(10) NOT NULL,
   `genre/ID` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `genre/id`
+-- Déchargement des données de la table `genre_id`
 --
 
-INSERT INTO `genre/id` (`ID`, `film/ID`, `genre/ID`) VALUES
+INSERT INTO `genre_id` (`ID`, `film/ID`, `genre/ID`) VALUES
 (1, 1, 1),
 (2, 1, 2),
 (3, 1, 3),
@@ -185,6 +205,83 @@ INSERT INTO `genre/id` (`ID`, `film/ID`, `genre/ID`) VALUES
 (13, 8, 8),
 (14, 8, 5);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `realisateur`
+--
+
+CREATE TABLE `realisateur` (
+  `id` int(150) NOT NULL,
+  `nom` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `realisateur`
+--
+
+INSERT INTO `realisateur` (`id`, `nom`) VALUES
+(1, 'Oliver Stone'),
+(2, 'Quentin Tarantino'),
+(3, 'Tony Scott'),
+(4, 'Wess Anderson'),
+(5, 'David Fincher'),
+(6, 'Nicolas Winding Refn'),
+(7, 'Robert Stevenson'),
+(8, 'Stephen Daldry'),
+(9, 'Alejandro Amenábar'),
+(10, 'Hugo Gelin'),
+(11, 'Olivier Baroux'),
+(12, 'Dzhanik Fayziev'),
+(13, 'Emir Kusturica'),
+(14, 'Aleksandr Boguslavski');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `realisateur_film`
+--
+
+CREATE TABLE `realisateur_film` (
+  `id` int(11) NOT NULL,
+  `realisateur_id` int(10) NOT NULL,
+  `film_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `realisateur_film`
+--
+
+INSERT INTO `realisateur_film` (`id`, `realisateur_id`, `film_id`) VALUES
+(16, 1, 1),
+(17, 2, 2),
+(18, 3, 5),
+(19, 4, 6),
+(20, 5, 7),
+(21, 6, 8),
+(22, 7, 9),
+(23, 8, 10),
+(24, 9, 11),
+(25, 10, 12),
+(26, 11, 13),
+(27, 12, 14),
+(28, 13, 15),
+(29, 14, 16),
+(30, 1, 1),
+(31, 2, 2),
+(32, 3, 5),
+(33, 4, 6),
+(34, 5, 7),
+(35, 6, 8),
+(36, 7, 9),
+(37, 8, 10),
+(38, 9, 11),
+(39, 10, 12),
+(40, 11, 13),
+(41, 12, 14),
+(42, 13, 15),
+(43, 14, 16);
+
 --
 -- Index pour les tables déchargées
 --
@@ -196,15 +293,9 @@ ALTER TABLE `acteur`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Index pour la table `acteur/film`
+-- Index pour la table `acteur_film`
 --
-ALTER TABLE `acteur/film`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `acteur/id`
---
-ALTER TABLE `acteur/id`
+ALTER TABLE `acteur_film`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -220,10 +311,22 @@ ALTER TABLE `genre`
   ADD PRIMARY KEY (`id_genre`);
 
 --
--- Index pour la table `genre/id`
+-- Index pour la table `genre_id`
 --
-ALTER TABLE `genre/id`
+ALTER TABLE `genre_id`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `realisateur`
+--
+ALTER TABLE `realisateur`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `realisateur_film`
+--
+ALTER TABLE `realisateur_film`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -236,16 +339,10 @@ ALTER TABLE `acteur`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT pour la table `acteur/film`
+-- AUTO_INCREMENT pour la table `acteur_film`
 --
-ALTER TABLE `acteur/film`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `acteur/id`
---
-ALTER TABLE `acteur/id`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `acteur_film`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `film`
@@ -260,11 +357,22 @@ ALTER TABLE `genre`
   MODIFY `id_genre` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT pour la table `genre/id`
+-- AUTO_INCREMENT pour la table `genre_id`
 --
-ALTER TABLE `genre/id`
+ALTER TABLE `genre_id`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-COMMIT;
+
+--
+-- AUTO_INCREMENT pour la table `realisateur`
+--
+ALTER TABLE `realisateur`
+  MODIFY `id` int(150) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT pour la table `realisateur_film`
+--
+ALTER TABLE `realisateur_film`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
