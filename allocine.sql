@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
@@ -8,6 +8,8 @@
 -- Version de PHP :  7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,13 +19,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `allocine`
+-- Database: `acs`
 --
+CREATE DATABASE IF NOT EXISTS `acs` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `acs`;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `acteur`
+-- Table structure for table `departement`
 --
 
 CREATE TABLE `acteur` (
@@ -32,7 +36,7 @@ CREATE TABLE `acteur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `acteur`
+-- Dumping data for table `departement`
 --
 
 INSERT INTO `acteur` (`id`, `nom_acteur`) VALUES
@@ -68,17 +72,19 @@ INSERT INTO `acteur` (`id`, `nom_acteur`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `acteur_film`
+-- Table structure for table `acteur_film`
 --
 
-CREATE TABLE `acteur_film` (
-  `id` int(10) NOT NULL,
+DROP TABLE IF EXISTS `acteur_film`;
+CREATE TABLE IF NOT EXISTS `acteur_film` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `acteur_id` int(10) NOT NULL,
-  `film_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `film_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `acteur_film`
+-- Dumping data for table `acteur_film`
 --
 
 INSERT INTO `acteur_film` (`id`, `acteur_id`, `film_id`) VALUES
@@ -114,18 +120,19 @@ INSERT INTO `acteur_film` (`id`, `acteur_id`, `film_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `film`
+-- Table structure for table `film`
 --
 
-CREATE TABLE `film` (
-  `id_film` int(255) NOT NULL,
+DROP TABLE IF EXISTS `film`;
+CREATE TABLE IF NOT EXISTS `film` (
+  `id_film` int(255) NOT NULL AUTO_INCREMENT,
   `titre` varchar(256) NOT NULL,
   `description` text NOT NULL,
   `annee_sortie` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `film`
+-- Dumping data for table `film`
 --
 
 INSERT INTO `film` (`id_film`, `titre`, `description`, `annee_sortie`) VALUES
@@ -147,7 +154,7 @@ INSERT INTO `film` (`id_film`, `titre`, `description`, `annee_sortie`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `genre`
+-- Table structure for table `genre`
 --
 
 CREATE TABLE `genre` (
@@ -156,7 +163,7 @@ CREATE TABLE `genre` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `genre`
+-- Dumping data for table `genre`
 --
 
 INSERT INTO `genre` (`id_genre`, `genre`) VALUES
@@ -175,7 +182,7 @@ INSERT INTO `genre` (`id_genre`, `genre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `genre_id`
+-- Table structure for table `genre_id`
 --
 
 CREATE TABLE `genre_id` (
@@ -185,7 +192,7 @@ CREATE TABLE `genre_id` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `genre_id`
+-- Dumping data for table `genre_id`
 --
 
 INSERT INTO `genre_id` (`id`, `film_id`, `genre_id`) VALUES
@@ -273,13 +280,37 @@ INSERT INTO `image_film` (`id`, `id_film`, `id_image`) VALUES
 -- Structure de la table `realisateur`
 --
 
-CREATE TABLE `realisateur` (
-  `id` int(150) NOT NULL,
-  `nom` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `image_film` (`id`, `id_film`, `id_image`) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 5, 3),
+(4, 6, 4),
+(5, 7, 5),
+(6, 8, 6),
+(7, 9, 7),
+(8, 10, 8),
+(9, 11, 9),
+(10, 12, 10),
+(11, 13, 11),
+(12, 14, 12),
+(13, 15, 13),
+(14, 16, 14);
+
+-- --------------------------------------------------------
 
 --
--- Déchargement des données de la table `realisateur`
+-- Table structure for table `realisateur`
+--
+
+DROP TABLE IF EXISTS `realisateur`;
+CREATE TABLE IF NOT EXISTS `realisateur` (
+  `id` int(150) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `realisateur`
 --
 
 INSERT INTO `realisateur` (`id`, `nom`) VALUES
@@ -302,17 +333,19 @@ INSERT INTO `realisateur` (`id`, `nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `realisateur_film`
+-- Table structure for table `realisateur_film`
 --
 
-CREATE TABLE `realisateur_film` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `realisateur_film`;
+CREATE TABLE IF NOT EXISTS `realisateur_film` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `realisateur_id` int(10) NOT NULL,
-  `film_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `film_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `realisateur_film`
+-- Dumping data for table `realisateur_film`
 --
 
 INSERT INTO `realisateur_film` (`id`, `realisateur_id`, `film_id`) VALUES
@@ -387,55 +420,3 @@ ALTER TABLE `realisateur_film`
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
-
---
--- AUTO_INCREMENT pour la table `acteur`
---
-ALTER TABLE `acteur`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT pour la table `acteur_film`
---
-ALTER TABLE `acteur_film`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT pour la table `film`
---
-ALTER TABLE `film`
-  MODIFY `id_film` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT pour la table `genre`
---
-ALTER TABLE `genre`
-  MODIFY `id_genre` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT pour la table `image`
---
-ALTER TABLE `image`
-  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT pour la table `image_film`
---
-ALTER TABLE `image_film`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT pour la table `realisateur`
---
-ALTER TABLE `realisateur`
-  MODIFY `id` int(150) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT pour la table `realisateur_film`
---
-ALTER TABLE `realisateur_film`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
