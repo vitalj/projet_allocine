@@ -24,8 +24,8 @@ foreach($enregistrement as $row)
 function reaMovie(){
     global $bdd;
     $reponse=$bdd->prepare(
-        'SELECT realisateur.nom, film.titre FROM (realisateur INNER JOIN realisateur_film ON realisateur.id=realisateur_film.realisateur_id) INNER JOIN film ON film.id_film=realisateur_film.film_id WHERE realisateur_film.realisateur_id=1');
-    
+        'SELECT realisateur.nom, film.titre FROM (realisateur INNER JOIN realisateur_film ON realisateur.id=realisateur_film.realisateur_id) INNER JOIN film ON film.id_film=realisateur_film.film_id WHERE realisateur_film.realisateur_id=:idRealisateur');
+    $reponse->bindParam(":idRealisateur", $_GET['id'], PDO::PARAM_INT);
     $reponse->execute();
     $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
     
@@ -67,8 +67,8 @@ function reaMovie(){
     {
         global $bdd;
         $reponse=$bdd->prepare(
-            'SELECT genre.genre, film.titre FROM (genre INNER JOIN genre_id ON genre.id_genre=genre_id.genre_id) INNER JOIN film ON film.id_film=genre_id.film_id WHERE genre_id.genre_id=1');
-        
+            'SELECT genre.genre, film.titre FROM (genre INNER JOIN genre_id ON genre.id_genre=genre_id.genre_id) INNER JOIN film ON film.id_film=genre_id.film_id WHERE genre_id.genre_id=:idGender');
+        $reponse->bindParam(':idGender', $_GET['id'], PDO::PARAM_INT);
         $reponse->execute();
         $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
         
@@ -105,8 +105,8 @@ function reaMovie(){
     function actorMovie()
     {
         global $bdd;
-        $reponse=$bdd->prepare("SELECT acteur.nom_acteur, film.titre FROM (acteur INNER JOIN acteur_film ON acteur.id=acteur_film.acteur_id) INNER JOIN film ON film.id_film=acteur_film.film_id WHERE acteur_film.acteur_id=1");
-        
+        $reponse=$bdd->prepare("SELECT acteur.nom_acteur, film.titre FROM (acteur INNER JOIN acteur_film ON acteur.id=acteur_film.acteur_id) INNER JOIN film ON film.id_film=acteur_film.film_id WHERE acteur_film.acteur_id=:idActor");
+        $reponse->bindParam(":idActor", $_GET["id"], PDO::PARAM_INT);
         $reponse->execute();
         $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
         
