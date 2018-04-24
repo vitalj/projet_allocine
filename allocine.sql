@@ -170,7 +170,7 @@ INSERT INTO `genre` (`id_genre`, `genre`) VALUES
 (8, 'Film noir'),
 (9, 'Film musical'),
 (10, 'Fantastique'),
-(11, 'histoire');
+(11, 'Histoire');
 
 -- --------------------------------------------------------
 
