@@ -10,7 +10,7 @@
 	// var_dump($url);
 	// echo "<br>";
 	$path = implode('/', $url);
-	var_dump($path);
+	// var_dump($path);
 
 	switch ($path) {
 		case '/popcorn-studio':

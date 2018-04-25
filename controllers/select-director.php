@@ -1,4 +1,5 @@
 <?php 
 	require_once('models/popcorn.php');
-	echo "select-director";
- ?>
+	require_once('views/content-render/select-director.html');
+
+	$directors = getDirectors();

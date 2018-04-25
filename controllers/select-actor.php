@@ -1,4 +1,5 @@
 <?php 
 	require_once('models/popcorn.php');
-	echo "select-actor";
- ?>
+	require_once('views/content-render/select-actor.html');
+
+$actors = getActors();

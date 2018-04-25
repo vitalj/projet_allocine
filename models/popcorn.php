@@ -3,22 +3,23 @@
 require_once('utils/db.php');
 
 
+
 /*LISTE DE TOUS LES TITRES DE FILMS */
 
 function getMovies(){
   global $bdd;
   $reponse=$bdd->prepare('SELECT film.titre FROM film');
-
   $reponse->execute();
   $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
-
+  
   return $enregistrement;
 }
 
 /*DONNE LA CARTE D'IDENTITÉ DU FILM DEPUIS LA LISTE DES TITRES*/
 
+
      /*Function get all*/
-      function getAll()
+      function getMovie()
       {
           global $bdd;
           $reponse=$bdd->prepare(" SELECT  film.id_film, film.titre, film.annee_sortie, film.description FROM film ");
@@ -42,8 +43,6 @@ function getMovies(){
           return $list;
           }
 
-
-    
     /*AFFICHER TOUS LES GENRES + TITRE DE FILMS*/
     function getGenders()
     {
@@ -58,6 +57,7 @@ function getMovies(){
     }
         
     /*AFFICHER UN GENRE PARTICULIER + TITRE DU FILM*/
+
     function getGender($id_film)
     {
         global $bdd;
@@ -88,6 +88,7 @@ function getMovies(){
 
     /*AFFICHER UN ACTEUR EN PARTICULIER + CES FILMS */
 
+
     function getActor($id_film)
     {
         global $bdd;
@@ -98,6 +99,28 @@ function getMovies(){
         
         return $enregistrement;    
     }
+
+    function getDirectors(){
+      global $bdd;
+      $response=$bdd->prepare("SELECT realisateur.nom FROM realisateur");
+      $response->execute();
+      $enregistrement=$response->fetchAll(PDO::FETCH_ASSOC);
+
+      return $enregistrement;
+    }
+
+    function getDirector(){
+        global $bdd;
+        $reponse=$bdd->prepare(
+            'SELECT realisateur.nom, film.titre FROM (realisateur INNER JOIN realisateur_film ON realisateur.id=realisateur_film.realisateur_id) INNER JOIN film ON film.id_film=realisateur_film.film_id WHERE realisateur_film.realisateur_id=:idRealisateur');
+        $reponse->bindParam(":idRealisateur", $_GET['id'], PDO::PARAM_INT);
+        $reponse->execute();
+        $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $enregistrement;
+    }
+
+
 
     function getDirectors(){
       global $bdd;
