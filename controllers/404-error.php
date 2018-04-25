@@ -1,4 +1,4 @@
 <?php 
 	require_once('models/popcorn.php');
-	echo "error 404";
+	require_once('views/content-render/404-error.html')
  ?>
