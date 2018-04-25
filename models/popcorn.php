@@ -35,7 +35,7 @@ function getMovies(){
           "genre"=>  getGender($row["id_film"]),
           "nom_acteur"=> getActor($row["id_film"]),
           "nom"=>getDirector($row["id_film"]),
-          "image"=> getImage($$row["id_film"])
+          "image"=> getImage($row["id_film"])
         ];
       }
       return $list;
