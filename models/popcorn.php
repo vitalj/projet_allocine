@@ -9,6 +9,7 @@ require_once('utils/db.php');
 function getMovies(){
   global $bdd;
   $reponse=$bdd->prepare('SELECT film.titre FROM film');
+
   $reponse->execute();
   $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
   
@@ -18,30 +19,30 @@ function getMovies(){
 /*DONNE LA CARTE D'IDENTITÉ DU FILM DEPUIS LA LISTE DES TITRES*/
 
 
-     /*Function get all*/
-      function getMovie()
+    function getMovie()
+    {
+      global $bdd;
+      $reponse=$bdd->prepare(" SELECT  film.id_film, film.titre, film.annee_sortie, film.description FROM film ");
+     
+      $reponse->execute();
+      $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
+      
+      foreach($enregistrement as $row)
       {
-          global $bdd;
-          $reponse=$bdd->prepare(" SELECT  film.id_film, film.titre, film.annee_sortie, film.description FROM film ");
-         
-          $reponse->execute();
-          $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
-          
-          foreach($enregistrement as $row)
-          {
-            $list[]=[
-              "id_film"=>$row["id_film"],
-              "titre"=>$row["titre"],
-              "annee_sortie"=>$row["annee_sortie"],
-              "description"=>$row["description"],
-              "genre"=>  getGender($row["id_film"]),
-              "nom_acteur"=> getActor($row["id_film"]),
-              "nom"=>getDirector($row["id_film"]),
-              "image"=> getImage($$row["id_film"])
-            ];
-          }
-          return $list;
-          }
+        $list[]=[
+          "id_film"=>$row["id_film"],
+          "titre"=>$row["titre"],
+          "annee_sortie"=>$row["annee_sortie"],
+          "description"=>$row["description"],
+          "genre"=>  getGender($row["id_film"]),
+          "nom_acteur"=> getActor($row["id_film"]),
+          "nom"=>getDirector($row["id_film"]),
+          "image"=> getImage($row["id_film"])
+        ];
+      }
+      return $list;
+    }
+
 
     /*AFFICHER TOUS LES GENRES + TITRE DE FILMS*/
     function getGenders()
@@ -100,27 +101,6 @@ function getMovies(){
         return $enregistrement;    
     }
 
-    function getDirectors(){
-      global $bdd;
-      $response=$bdd->prepare("SELECT realisateur.nom FROM realisateur");
-      $response->execute();
-      $enregistrement=$response->fetchAll(PDO::FETCH_ASSOC);
-
-      return $enregistrement;
-    }
-
-    function getDirector(){
-        global $bdd;
-        $reponse=$bdd->prepare(
-            'SELECT realisateur.nom, film.titre FROM (realisateur INNER JOIN realisateur_film ON realisateur.id=realisateur_film.realisateur_id) INNER JOIN film ON film.id_film=realisateur_film.film_id WHERE realisateur_film.realisateur_id=:idRealisateur');
-        $reponse->bindParam(":idRealisateur", $_GET['id'], PDO::PARAM_INT);
-        $reponse->execute();
-        $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $enregistrement;
-    }
-
-
 
     function getDirectors(){
       global $bdd;
@@ -130,6 +110,7 @@ function getMovies(){
 
       return $enregistrement;
     }
+
 
     function getDirector($id_film){
         global $bdd;
@@ -143,7 +124,6 @@ function getMovies(){
       }
 
       
-
       /*Function show image */
       function getImage($id_film){
       global $bdd;
@@ -155,5 +135,6 @@ function getMovies(){
       return $enregistrement;    
     }
  
+
 ?>
  
