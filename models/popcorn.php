@@ -1,14 +1,12 @@
-<?php 
+<?php
 
 require_once('utils/db.php');
 
-
 /*LISTE DE TOUS LES TITRES DE FILMS */
-
 
 function getMovies(){
   global $bdd;
-  $reponse=$bdd->prepare('SELECT film.titre FROM film');
+  $reponse=$bdd->prepare('SELECT film.titreyes FROM film');
 
   $reponse->execute();
   $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
@@ -97,7 +95,7 @@ function getMovies(){
         $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
         
         return $enregistrement;
-      }
+    }
 
 ?>
  
