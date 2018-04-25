@@ -3,19 +3,21 @@
 require_once('utils/db.php');
 
 
+
 /*LISTE DE TOUS LES TITRES DE FILMS */
 
 function getMovies(){
   global $bdd;
   $reponse=$bdd->prepare('SELECT film.titre FROM film');
-  
+
   $reponse->execute();
   $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
-
+  
   return $enregistrement;
 }
 
 /*DONNE LA CARTE D'IDENTITÉ DU FILM DEPUIS LA LISTE DES TITRES*/
+
 
     function getMovie()
     {
@@ -42,7 +44,6 @@ function getMovies(){
     }
 
 
-    
     /*AFFICHER TOUS LES GENRES + TITRE DE FILMS*/
     function getGenders()
     {
@@ -88,6 +89,7 @@ function getMovies(){
 
     /*AFFICHER UN ACTEUR EN PARTICULIER + CES FILMS */
 
+
     function getActor($id_film)
     {
         global $bdd;
@@ -109,6 +111,7 @@ function getMovies(){
       return $enregistrement;
     }
 
+
     function getDirector($id_film){
         global $bdd;
         $reponse=$bdd->prepare(
@@ -121,7 +124,6 @@ function getMovies(){
       }
 
       
-
       /*Function show image */
       function getImage($id_film){
       global $bdd;
