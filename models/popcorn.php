@@ -5,7 +5,6 @@ require_once('utils/db.php');
 
 /*LISTE DE TOUS LES TITRES DE FILMS */
 
-
 function getMovies(){
   global $bdd;
   $reponse=$bdd->prepare('SELECT film.titre FROM film');
@@ -18,9 +17,30 @@ function getMovies(){
 
 /*DONNE LA CARTE D'IDENTITÉ DU FILM DEPUIS LA LISTE DES TITRES*/
 
-// function getMovie();
-
-
+     /*Function get all*/
+      function getAll()
+      {
+          global $bdd;
+          $reponse=$bdd->prepare(" SELECT  film.id_film, film.titre, film.annee_sortie, film.description FROM film ");
+         
+          $reponse->execute();
+          $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
+          
+          foreach($enregistrement as $row)
+          {
+            $list[]=[
+              "id_film"=>$row["id_film"],
+              "titre"=>$row["titre"],
+              "annee_sortie"=>$row["annee_sortie"],
+              "description"=>$row["description"],
+              "genre"=>  getGender($row["id_film"]),
+              "nom_acteur"=> getActor($row["id_film"]),
+              "nom"=>getDirector($row["id_film"]),
+              "image"=> getImage($$row["id_film"])
+            ];
+          }
+          return $list;
+          }
 
 
     
@@ -111,29 +131,6 @@ function getMovies(){
       
       return $enregistrement;    
     }
-      /*Function get all*/
-      function getAll()
-      {
-          global $bdd;
-          $reponse=$bdd->prepare(" SELECT  film.id_film, film.titre, film.annee_sortie, film.description FROM film ");
-         
-          $reponse->execute();
-          $enregistrement=$reponse->fetchAll(PDO::FETCH_ASSOC);
-          
-          foreach($enregistrement as $row)
-          {
-            $list[]=[
-              "id_film"=>$row["id_film"],
-              "titre"=>$row["titre"],
-              "annee_sortie"=>$row["annee_sortie"],
-              "description"=>$row["description"],
-              "genre"=>  getGender($row["id_film"]),
-              "nom_acteur"=> getActor($row["id_film"]),
-              "nom"=>getDirector($row["id_film"]),
-              "image"=> getImage($$row["id_film"])
-            ];
-          }
-          return $list;
-          }
+ 
 ?>
  
