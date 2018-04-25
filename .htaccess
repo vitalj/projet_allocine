@@ -1,0 +1,25 @@
+#on suit les liens symboliques
+
+Options +FollowSymLinks
+
+#Activation du mod rewrite d'apache
+
+RewriteEngine On
+
+RewriteRule ^home/$ index.php [L,QSA]
+RewriteRule ^/$ index.php [L,QSA]
+
+RewriteRule ^select-movie/$ index.php [L,QSA]
+RewriteRule ^select-movie/([0-9]+)$ index.php?id=$1 [L,QSA]
+
+RewriteRule ^select-gender/([0-9]+)$ index.php?id=$1 [L,QSA]
+RewriteRule ^select-gender/$ index.php [L,QSA]
+
+RewriteRule ^select-actor/([0-9]+)$ index.php?id=$1 [L,QSA]
+RewriteRule ^select-actor/$ index.php [L,QSA]
+
+RewriteRule ^select-director/([0-9]+)$ index.php?id=$1 [L,QSA]
+RewriteRule ^select-director/$ index.php [L,QSA]
+
+
+ErrorDocument 404 /popcorn-studio/index.php 
